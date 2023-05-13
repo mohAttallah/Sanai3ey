@@ -116,6 +116,7 @@ FOREIGN KEY (ID_Service) REFERENCES Service (ID_Service)
 
 
 CREATE TABLE Issue(
+ID_Issue int NOT NULL,
 Description varchar(350),
 Date_Report date,
 ID_Technical int,
@@ -124,6 +125,7 @@ ID_Service int,
 ID_Request int,
 ID_Report int NOT NULL,
 ID_User int NOT NULL,
+PRIMARY KEY(ID_Issue),
 FOREIGN KEY (ID_User) REFERENCES User (ID_User),
 FOREIGN KEY (ID_Report) REFERENCES Report (ID_Report)
 );
