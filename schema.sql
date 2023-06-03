@@ -1,6 +1,15 @@
 DROP DATABASE SANAI3Y;
 CREATE DATABASE  SANAI3Y;
 USE SANAI3Y;
+
+
+CREATE TABLE Account (
+ID_Account int NOT NULL,
+Status varchar(255),
+Account_Type varchar(255),
+PRIMARY KEY (ID_Account) 
+);
+
 CREATE TABLE User (
 ID_User int NOT NULL AUTO_INCREMENT UNIQUE,
 ID_Account int NOT NULL,
@@ -23,12 +32,7 @@ ID_Report int NOT NULL,
 PRIMARY KEY (ID_Report)
 );
 
-CREATE TABLE Account (
-ID_Account int NOT NULL,
-Status varchar(255),
-Account_Type varchar(255),
-PRIMARY KEY (ID_Account) 
-);
+
 
 CREATE TABLE Admin (
 ID_Admin  int NOT NULL UNIQUE,
