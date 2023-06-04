@@ -1,0 +1,207 @@
+/* Start Variables */
+
+/* End Variables */
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
+}
+.wrapper{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 5px 5px 4px #a7a7a7b0;
+}
+
+form input{
+    width: 92%;
+    outline: none;
+    border: 1px solid #a19c9c;
+    padding: 5px 25px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+button{
+    font-size: 1rem;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 10px 0;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    width: 50%;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+.Name{
+width: 46%;
+text-align: left;
+}
+.Birthday{
+    font-weight:bold;
+    text-align: left;
+}
+.date{
+    width: 25%;
+    position: relative;
+    left: -25px;
+}
+.Gender{
+    font-weight:bold;
+    text-align: left;
+}
+#gender{
+    width: 65%;
+    outline: none;
+    border: 1px solid #a19c9c;
+    padding: 5px 25px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    position: relative;
+    left: -45px;
+}
+.terms{
+    text-align: left;
+    font-size: 12px;
+}
+#mline{
+    margin-bottom: -0px;
+}
+#mlinebottom{
+    margin-bottom:25px ;
+}
+
+/* page 2 */
+
+.wrapper_2{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 5px 5px 4px #a7a7a7b0;
+}
+
+#mtext{
+    text-align: initial;
+    padding: 26px 5px;
+}
+
+.number {
+    width: 45px;
+    height: 41px;
+}
+/*inpute[type=number] ::-webkit-inner-spin-button,
+inpute[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}مشان اشيل الاسهم من فورم الارقام*/
+
+.Next{
+    width: 65px;
+    position: relative;
+    right: -60px;
+}
+.send_code{
+    color: black;
+    font-size: 12px;
+    position: relative;
+    left: -50px;
+}
+
+/* page 3 */
+
+.wrapper_3{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 5px 5px 4px #a7a7a7b0;
+}
+#photo_{
+    font-size: 1rem;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 10px 8px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    width: 50%;
+    background: black;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    left: -59px;
+}
+
+#photo{
+display: none;
+}
+a{
+    color: black;
+}
+#skip{
+    position: relative;
+    left: 40px;
+}
+
+/* page 4 */
+.wrapper_4{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 5px 5px 4px #a7a7a7b0;
+}
+#phone_{
+    position: relative;
+    left: -53px;
+}
+#phone{
+    position: relative;
+    left: 6px;
+    width: 225px;
+    margin-top: 10px;
+    margin-bottom:10px
+}
+#city_{
+    position: relative;
+    left: -95px;
+}
+#city{
+    width: 225px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+    left: 6px;
+}
+.Next_2{
+    width: 65px;
+    position: relative;
+    right: -80px;
+}
+#district_{
+    position: relative;
+    left: -83px;
+}
+#district{
+    position: relative;
+    left: 6px;
+    width: 225px;
+    margin-top: 10px;
+    margin-bottom:10px
+}
