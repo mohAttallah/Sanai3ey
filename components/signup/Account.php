@@ -1,19 +1,19 @@
 <form method="POST">
-    Account_Type : <input type="text" name="Account_Type" required/>
+    Account_Type : <input type="text" name="Account_Type" required />
     <br>
-    <button type="submit" name="save" >save</button>
+    <button type="submit" name="save">save</button>
 </form>
 <form action="signupuser.php">
 
-    <button type="submit" name="continuation" >continuation</button>
+    <button type="submit" name="continuation">continuation</button>
 </form>
 
 <?php
 $username = "root";
 $password = "";
-$database = new PDO("mysql:host=localhost;dbname=sanai3ey;charset=utf8;",$username,$password);
+$database = new PDO("mysql:host=localhost;dbname=sanai3ey;charset=utf8;", $username, $password);
 
-if(isset($_POST['save'])){
+if (isset($_POST['save'])) {
     $Account_Type = $_POST['Account_Type'];
 
     function createAccount($url, $data)
@@ -58,5 +58,5 @@ if(isset($_POST['save'])){
     createAccount($url, $data);
 
 
-}   
+}
 ?>
