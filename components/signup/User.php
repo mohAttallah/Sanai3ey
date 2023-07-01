@@ -1,7 +1,5 @@
 <form method="POST">
-    <label for="id_account">ID_Account:</label>
-    <input type="text" name="id_account" id="id_account" required><br><br>
-
+   
     <label for="first_name">First Name:</label>
     <input type="text" name="first_name" id="first_name" required><br><br>
 
@@ -41,73 +39,71 @@
 
     <button type="submit" name="save">save</button>
 </form>
-<form action="signuptechnical.php">
-
-    <button type="submit" name="continuation">continuation</button>
-</form>
 
 <?php
-$username = "root";
-$password = "";
-$database = new PDO("mysql:host=localhost;dbname=sanai3ey;charset=utf8;", $username, $password);
-if (isset($_POST['save'])) {
-    $id_account = $_POST['id_account'];
-    $first_name = $_POST['first_name'];
-    $last_namet = $_POST['last_name'];
-    $gender = $_POST['gender'];
-    $age = $_POST['age'];
-    $photo = $_POST['photo'];
-    $date_join = $_POST['date_join'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $phone_number = $_POST['phone_number'];
-    $district = $_POST['district'];
-    $city_name = $_POST['city_name'];
 
-    // URL to send the POST request
-    $url = 'http://localhost/sanai3ey/restfull/user.php/api/users';
+    $id_Account = $_GET['id_Account'];
+    echo "id_Account= " . $id_Account;
 
-    // Data to be posted
-    $data = array(
-        "ID_Account" => $id_account,
-        "First_Name" => $first_name,
-        "Last_Name" => $last_namet,
-        "Gender" => $gender,
-        "age" => $age,
-        "Photo" => $photo,
-        "Date_Join" => $date_join,
-        "Email" => $email,
-        "Password" => $password,
-        "Phone_Number" => $phone_number,
-        "District" => $district,
-        "City_Name" => $city_name
-    );
+    $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : '';
+    $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $age = isset($_POST['age']) ? $_POST['age'] : '';
+    $photo = isset($_POST['photo']) ? $_POST['photo'] : '';
+    $date_join = isset($_POST['date_join']) ? $_POST['date_join'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $phone_number = isset($_POST['phone_number']) ? $_POST['phone_number'] : '';
+    $district = isset($_POST['district']) ? $_POST['district'] : '';
+    $city_name = isset($_POST['city_name']) ? $_POST['city_name'] : '';
 
-    // Convert data to JSON
-    $jsonData = json_encode($data);
+    $userData = [
+        'ID_Account' => $id_Account,
+        'First_Name' => $first_name,
+        'Last_Name' => $last_name,
+        'Gender' => $gender,
+        'age' => $age,
+        'Photo' => $photo,
+        'Date_Join' => $date_join,
+        'Email' => $email,
+        'Password' => $password,
+        'Phone_Number' => $phone_number,
+        'District' => $district,
+        'City_Name' => $city_name
+    ];
 
-    // Initialize cURL
-    $curl = curl_init($url);
+    function fetchAndPostData($userData)
+    {
+        // Perform POST request
+        $postData = json_encode($userData);
+    
+        $url = 'http://localhost/sanai3ey/server/user.php/api/users';
+    
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+    
+        $response = curl_exec($ch);
+        curl_close($ch);
+    
+        $responseData = json_decode($response, true);
+        $returnedId = $responseData['ID_User'];
+    
+        return $returnedId;
+    }
+     
+    if (isset($_POST['save'])) {
 
-    // Set the necessary cURL options for the POST request
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $jsonData);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $savedId = fetchAndPostData($userData);
+        echo "Returned ID: " . $savedId;
 
-    // Send the POST request
-    $response = curl_exec($curl);
-
-    // Check for errors
-    if ($response === false) {
-        $error = curl_error($curl);
-        echo "cURL error: " . $error;
-    } else {
-        // Handle the response
-        echo "Response: " . $response;
+        $id_user = strval($savedId);
+        $url = "Technical.php?id_user=" . urlencode($id_user);
+        header("Location: " . $url);
+        exit;
+   
     }
 
-    // Close cURL resource
-    curl_close($curl);
-}
 ?>
