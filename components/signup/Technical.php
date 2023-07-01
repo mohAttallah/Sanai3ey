@@ -1,7 +1,5 @@
 <form method="POST">
-    <label for="id_user">ID_User:</label>
-    <input type="text" name="id_user" id="id_user" required><br><br>
-
+    
     <label for="category_name">Category Name:</label>
     <input type="text" name="category_name" id="category_name" required><br><br>
 
@@ -13,59 +11,66 @@
 
     <button type="submit" name="save">save</button>
 </form>
-<form action="signupcustomer.php">
-
-    <button type="submit" name="continuation">continuation</button>
-</form>
 
 <?php
-$username = "root";
-$password = "";
-$database = new PDO("mysql:host=localhost;dbname=sanai3ey;charset=utf8;", $username, $password);
 
-if (isset($_POST['save'])) {
-    $id_user = $_POST['id_user'];
-    $category_name = $_POST['category_name'];
-    $project_done = $_POST['project_done'];
-    $bio = $_POST['bio'];
+    $id_user = $_GET['id_user'];
+    echo "id_user= " . $id_user;
 
-    function createTechnical($url, $data)
+    $category_name = isset($_POST['category_name']) ? $_POST['category_name'] : '';
+    $project_done = isset($_POST['project_done']) ? $_POST['project_done'] : '';
+    $bio = isset($_POST['bio']) ? $_POST['bio'] : '';
+
+    $technicalData = [   
+        "ID_User" => $id_user,
+        "Category_name" => $category_name,
+        "Project_Done" => $project_done,
+        "Bio" => $bio
+    ];
+
+
+    function fetchAndPostTechnicalData($technicalData)
     {
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-Type: application/json',
-                'content' => $data
-            ]
-        ];
+        // Fetch data using GET request
+        $url = 'http://localhost/sanai3ey/server/technical.php/technicals';
 
-        $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        if ($result !== false) {
-            $response = json_decode($result, true);
-            if (isset($response['message'])) {
-                echo "Technical created successfully. Message: " . $response['message'];
-            } else {
-                echo "Failed to create the technical.";
-            }
-        } else {
-            echo "Failed to create the technical.";
-        }
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $responseData = json_decode($response, true);
+        $idTechnical = $responseData['ID_Technical'];
+
+        // Perform POST request
+        $postData = json_encode($technicalData);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $responseData = json_decode($response, true);
+        $returnedId = $responseData['ID_Technical'];
+
+        return $returnedId;
     }
 
-    $url = 'http://localhost/sanai3ey/restfull/technical.php/technicals';
 
-    // Create a new technical
-    $data = json_encode([
-        'ID_User' => $id_user,
-        'Category_Name' => $category_name,
-        'Project_Done' => $project_done,
-        'Bio' => $bio
-    ]);
 
-    createTechnical($url, $data);
+    if (isset($_POST['save'])) {
 
-}
+    $savedId = fetchAndPostTechnicalData($technicalData);
+    echo "Returned ID: " . $savedId;
+
+    }
+
+    
 
 ?>
