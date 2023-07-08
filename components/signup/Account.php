@@ -1,8 +1,13 @@
 <form method="POST">
-    Account_Type : <input type="text" name="Account_Type" required />
+    Account_Type : <br>
+    <input type="radio" name="Account_Type" value="technical" checked> technical<br>
+    <input type="radio" name="Account_Type" value="customer"> customer<br>
+
     <br>
     <button type="submit" name="save">save</button>
 </form>
+
+
 
 <?php
 
@@ -35,15 +40,16 @@
 
     if (isset($_POST['save'])) {
         $Account_Type = $_POST['Account_Type'];
-
+    
         // Usage example
         $savedId = handlePostRequest($Account_Type);
         echo "Returned ID: " . $savedId;
-
-
+    
         $id_Account = strval($savedId);
-        $url = "User.php?id_Account=" . urlencode($id_Account);
-        header("Location: " . $url);
+        $url = "User.php";
+        $params = array('id_Account' => $id_Account, 'Account_Type' => $Account_Type);
+        $queryString = http_build_query($params);
+        header("Location: " . $url . "?" . $queryString);
         exit;
     }
 
