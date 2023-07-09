@@ -5,46 +5,36 @@
 </form>
 
 <?php
+// $username = "root";
+// $password = "";
+// $database = new PDO("mysql:host=localhost;dbname=sanai3ey;charset=utf8;", $username, $password);
+function handlePostRequest()
+{
+    $postData = json_encode([
+        'Status' => 'example_status',
+        'Account_Type' => 'example_account_type'
+    ]);
 
-    function handlePostRequest($Account_Type)
-    {
-        $postData = json_encode([
-            'Status' => 'active',
-            'Account_Type' => $Account_Type
-        ]);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://localhost/sanai3ey/server/account.php/accounts');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
-        // curl library in PHP to make an HTTP request and retrieve the ID from the response. Here's an example code snippet
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://localhost/sanai3ey/server/account.php/accounts');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+    $response = curl_exec($ch);
+    curl_close($ch);
 
-        $response = curl_exec($ch);
-        curl_close($ch);
+    $responseData = json_decode($response, true);
+    $id = $responseData['id_Account'];
 
-        $responseData = json_decode($response, true);
-        $id = $responseData['id_Account'];
+    // Save the ID in a variable
+    $savedId = $id;
+    // Use the $savedId variable for further processing
 
-        // Save the ID in a variable
-        $savedId = $id;
-        // Use the $savedId variable for further processing
+    return $savedId;
+}
 
-        return $savedId;
-    }
-
-    if (isset($_POST['save'])) {
-        $Account_Type = $_POST['Account_Type'];
-
-        // Usage example
-        $savedId = handlePostRequest($Account_Type);
-        echo "Returned ID: " . $savedId;
-
-
-        $id_Account = strval($savedId);
-        $url = "User.php?id_Account=" . urlencode($id_Account);
-        header("Location: " . $url);
-        exit;
-    }
-
+// Usage example
+$savedId = handlePostRequest();
+echo "Returned ID: " . $savedId;
 ?>

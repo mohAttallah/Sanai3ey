@@ -1,16 +1,5 @@
 <?php
-$host = 'localhost';
-$dbName = 'sanai3ey';
-$user = 'root';
-$password = '';
-
-// Create PDO instance
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbName", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
+require_once 'db_connection.php';
 
 
 // find the id_techincal using the Email from table user

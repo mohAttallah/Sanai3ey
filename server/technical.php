@@ -1,23 +1,13 @@
 <?php
 // Database connection settings
-$host = 'localhost';
-$dbName = 'sanai3ey';
-$user = 'root';
-$password = '';
+require_once 'db_connection.php';
 
-// Create PDO instance
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbName", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
 
 /* 
 
 GET http://localhost/sanai3ey/server/technical.php/technicals - Get all technicals
-POST http://localhost/sanai3ey/server/technical.php/technicals - Create a new customer (accepts JSON payload)
-DELETE http://localhost/sanai3ey/server/technical.php/technicals?id={id} - Delete a customer by ID
+POST http://localhost/sanai3ey/server/technical.php/technicals - Create a new technicals  (accepts JSON payload)
+DELETE http://localhost/sanai3ey/server/technical.php/technicals?id={id} - Delete a technicals  by ID
 
 
 */
