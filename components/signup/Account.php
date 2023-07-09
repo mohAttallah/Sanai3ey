@@ -35,11 +35,6 @@ function handlePostRequest()
     // Save the ID in a variable
     $savedId = $id;
     // Use the $savedId variable for further processing
-
-<<<<<<< HEAD
-    return $savedId;
-}
-=======
         // Save the ID in a variable
         $savedId = $id;
         // Use the $savedId variable for further processing
