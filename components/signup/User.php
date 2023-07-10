@@ -1,44 +1,3 @@
-<form method="POST">
-   
-    <label for="first_name">First Name:</label>
-    <input type="text" name="first_name" id="first_name" ><br><br>
-
-    <label for="last_name">Last Name:</label>
-    <input type="text" name="last_name" id="last_name" ><br><br>
-
-    <label for="gender">Gender:</label>
-    <select name="gender" id="gender" >
-        <option value="m">Male</option>
-        <option value="f">Female</option>
-    </select><br><br>
-
-    <label for="age">Age:</label>
-    <input type="number" name="age" id="age" ><br><br>
-
-    <label for="photo">Photo:</label>
-    <input type="file" name="photo" id="photo"><br><br>
-
-    <!-- <label for="date_join">Date of Joining:</label>
-    <input type="date" name="date_join" id="date_join" required><br><br> -->
-
-    <label for="email">Email:</label>
-    <input type="text" name="email" id="email"><br><br>
-
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" ><br><br>
-
-    <label for="phone_number">Phone Number:</label>
-    <input type="tel" name="phone_number" id="phone_number" ><br><br>
-
-    <label for="district">District:</label>
-    <input type="text" name="district" id="district" ><br><br>
-
-    <label for="city_name">City Name:</label>
-    <input type="text" name="city_name" id="city_name" ><br><br>
-
-    <button type="submit" name="save">save</button>
-</form>
-
 <?php
 
     $id_Account = $_GET['id_Account'];
@@ -49,7 +8,6 @@
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
     $age = isset($_POST['age']) ? $_POST['age'] : '';
     $photo = isset($_POST['photo']) ? $_POST['photo'] : '';
-    //$date_join = isset($_POST['date_join']) ? $_POST['date_join'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $phone_number = isset($_POST['phone_number']) ? $_POST['phone_number'] : '';
@@ -115,7 +73,7 @@
     if (isset($_POST['save'])) {
 
         $savedId = fetchAndPostData($userData);
-        echo "Returned ID: " . $savedId . "<br>";
+        echo "user ID: " . $savedId . "<br>";
 
         // Validate email
         $Validate_email = false;
@@ -156,3 +114,170 @@
     }
 
 ?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Sanai3ey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F2EAD3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            margin-bottom: 150px;
+            padding: 80px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .gender-label {
+            margin-bottom: 5px;
+        }
+
+        .btn-signup {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            font-family: 16px;
+            cursor: pointer;
+        }
+            .btn-signup:hover {
+                background-color: #F2EAD3;
+            }
+            .already-account {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+                .already-account a {
+                    color: #000000;
+                }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* تخصيص حقل تحديد المدينة */
+        label[for="city"],
+        select#city {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* تخصيص حقل تحديد الحي */
+        label[for="district"],
+        select#district {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .phone-number-label::before {
+            content: "+962 ";
+        }
+    </style>
+</head>
+<body>
+    <h1>Sanai3ey</h1>
+    <div class="container">
+        <h2>Create a new account</h2>
+        <p style="text-align: center;">It’s quick and easy</p>
+        <form method="POST">
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" id="first_name" placeholder="Enter the First Name" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" id="last_name" placeholder="Enter the Last Name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Enter the Email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Enter the Password" required>
+
+            <label for="age">Age:</label>
+            <input type="text" name="age" id="age" placeholder="Enter the Age" required>
+
+            <label class="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="" selected disabled>--Choose the gender--</option>
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+            </select>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" name="phone_number" id="phone_number" placeholder="+962" required>
+
+            <label for="district">District:</label>
+            <input type="text" name="district" id="district" placeholder="Enter the district" required>
+
+            <label for="city_name">Select Your City:</label>
+            <select id="city_name" name="city_name">
+                <option value="" selected disabled>--Choose the city--</option>
+                <option value="Irbid">Irbid</option>
+                <option value="Ajloun">Ajloun</option>
+                <option value="Jerash">Jerash</option>
+                <option value="Mafraq">Mafraq</option>
+                <option value="Balqa">Balqa</option>
+                <option value="Amman">Amman</option>
+                <option value="Zarqa">Zarqa</option>
+                <option value="Madaba">Madaba</option>
+                <option value="Karak">Karak</option>
+                <option value="Tafilah">Tafilah</option>
+                <option value="Ma'an">Ma'an</option>
+                <option value="Aqaba">Aqaba</option>
+            </select>
+
+            <label for="photo">Photo:</label>
+            <input type="file" name="photo" id="photo"><br><br>
+
+
+            <p> By clicking Sign Up, you agree to our <u>Tems, Privacy Policy</u> and <u>Cookies Policy</u>. You may receive Email Notifications from us and can opt out any time.</p>
+            <button type="submit" name="save" class="btn-signup">Sign Up</button>
+        </form>
+
+        <p class="already-account">Already have an account? <a href="LOGIN1.html">Sign In</a></p>
+    </div>
+</body>
+</html>
